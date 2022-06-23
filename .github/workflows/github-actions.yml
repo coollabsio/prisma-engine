@@ -37,23 +37,13 @@ jobs:
           context: .
           platforms: linux/amd64
           push: true
-          tags: coollabsio/test-prisma-engine:${{steps.version.outputs.prop}}
-          cache-from: type=registry,ref=coollabsio/test-prisma-engine:buildcache-${{steps.version.outputs.prop}}
-          cache-to: type=registry,ref=coollabsio/test-prisma-engine:buildcache-${{steps.version.outputs.prop}},mode=max
-       -
-        name: Build and push
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          platforms: linux/arm64
-          push: true
-          tags: coollabsio/test-prisma-engine:${{steps.version.outputs.prop}}-arm64
-          cache-from: type=registry,ref=coollabsio/test-prisma-engine:buildcache-${{steps.version.outputs.prop}}-arm64
-          cache-to: type=registry,ref=coollabsio/test-prisma-engine:buildcache-${{steps.version.outputs.prop}}-arm64,mode=max
+          tags: coollabsio/prisma-engine:${{steps.version.outputs.prop}}-amd64
+          cache-from: type=registry,ref=coollabsio/prisma-engine:buildcache-${{steps.version.outputs.prop}}-amd64
+          cache-to: type=registry,ref=coollabsio/prisma-engine:buildcache-${{steps.version.outputs.prop}}-amd64,mode=max
        - 
         name: Create and push manifest images
         uses: Noelware/docker-manifest-action@master
         with:
-          base-image: coollabsio/test-prisma-engine:${{steps.version.outputs.prop}}
-          extra-images: coollabsio/test-prisma-engine:${{steps.version.outputs.prop}}-arm64
+          base-image: coollabsio/prisma-engine:${{steps.version.outputs.prop}}
+          extra-images: coollabsio/prisma-engine:${{steps.version.outputs.prop}}-amd64
           push: true

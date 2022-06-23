@@ -1,0 +1,1 @@
+docker buildx build --platform linux/arm64 -t coollabsio/prisma-engine:3.15 --push .
